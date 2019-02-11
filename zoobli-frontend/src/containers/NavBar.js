@@ -5,12 +5,6 @@ const NavBar = (props) => {
 
     return (
         <div className="NavBar">
-            <ul id="nav">
-                <li><img src= {logo} /></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-            </ul>
         </div>
     )
 
