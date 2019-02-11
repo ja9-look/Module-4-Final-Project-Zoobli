@@ -2,6 +2,7 @@ import React from 'react';
 import ImageCard from '../components/ImageCard';
 
 const ImageBrowser = (props) => {
+    console.log(props)
     
     return (
         <div className="ImageContainer">
@@ -10,7 +11,6 @@ const ImageBrowser = (props) => {
             )}
         </div>
     )
-
 }
 
 export default ImageBrowser
