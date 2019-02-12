@@ -12,6 +12,7 @@ class App extends Component {
 
   state = {
     currentUser: '',
+    currentImage: '',
     images: [],
     showSign: 'up'
   }
@@ -50,6 +51,10 @@ class App extends Component {
       password: event.target.password.value
     }
     this.createUser(newUser)
+    event.target.first_name.value = ''
+    event.target.last_name.value = ''
+    event.target.username.value = ''
+    event.target.password.value = ''
   }
 
   createUser = (newUser) => {
@@ -65,12 +70,15 @@ class App extends Component {
     }
     API.login(currentUser)
       .then(data => this.login(data))
+      event.target.username.value = ''
+      event.target.password.value = ''
   }
 
   handleImageForm = (event) => {
     event.preventDefault()
     const image_url = event.target.image_url.value
     this.postImagetoAPI(image_url)
+    event.target.image_url.value = ''
   }
 
   postImagetoAPI = (image_url) => {
@@ -79,6 +87,7 @@ class App extends Component {
       user_id: this.state.currentUser.id
     }
     API.createImage(image)
+    .then(data => this.setState({ currentImage: data }))
     API.postToGoogle(image_url)
     .then(data => data.responses[0].labelAnnotations.map(tag => this.saveTag(tag.description)))
   }
@@ -86,10 +95,17 @@ class App extends Component {
   saveTag (tagName) {
     API.getTags()
     .then(data => {
-      if (!data.find(tag => tag.name.toString() === tagName.toString())) {
+      const currentTag = data.find(tag => tag.name.toString() === tagName.toString())
+      if (!currentTag) {
         API.postTag({ name: tagName })
+          .then(newTag => {
+            API.postScore(newTag, this.state.currentImage)
+            API.postToWiki(newTag)
+        })
+      } else {
+        API.postScore(currentTag, this.state.currentImage)
       }
-    }) 
+    })
   }
 
   render() {
@@ -98,19 +114,15 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} alt="logo" />
           < NavBar />
-          <div>
-            < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
-          </div>
           { localStorage.token
           ?
           <div>
           < ImageForm handleImageForm={this.handleImageForm}/>
-          < ImageBrowser images={this.state.images}/>
           </div>
           :
-          null
+          < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
           }
-  
+          < ImageBrowser images={this.state.images}/>
         </header>
       </div>
     );
