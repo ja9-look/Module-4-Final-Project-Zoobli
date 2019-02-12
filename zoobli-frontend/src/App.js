@@ -79,6 +79,17 @@ class App extends Component {
       user_id: this.state.currentUser.id
     }
     API.createImage(image)
+    API.postToGoogle(image_url)
+    .then(data => data.responses[0].labelAnnotations.map(tag => this.saveTag(tag.description)))
+  }
+
+  saveTag (tagName) {
+    API.getTags()
+    .then(data => {
+      if (!data.find(tag => tag.name.toString() === tagName.toString())) {
+        API.postTag({ name: tagName })
+      }
+    }) 
   }
 
   render() {
