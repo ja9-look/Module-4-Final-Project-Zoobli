@@ -1,4 +1,5 @@
 import { SlowBuffer } from "buffer";
+import googleAPIKey from '../key'
 
 class API {
     static init () {
@@ -6,7 +7,10 @@ class API {
         this.usersURL = this.baseURL + '/users'
         this.loginURL = this.baseURL + '/login'
         this.imagesURL = this.baseURL + '/images'
+        this.tagsURL = this.baseURL + '/tags'
         this.profileURL = this.baseURL + '/profile'
+        this.wikiURL = "https://en.wikipedia.org/w/api.php?action=opensearch&search="
+        this.googleURL = `https://vision.googleapis.com/v1/images:annotate?key=${googleAPIKey}`
     }
 
     static login (user) {
@@ -26,8 +30,19 @@ class API {
     }
 
     static createImage (image) {
-        console.log(image)
         return this.post(this.imagesURL, { image })
+    }
+
+    static getTags () {
+        return this.get(this.tagsURL)
+    }
+
+    static postTag (tag) {
+        return this.post(this.tagsURL, { tag })
+    }
+
+    static saveScores () {
+
     }
 
     static post (url, data) {
@@ -47,7 +62,31 @@ class API {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }).then(resp => resp.json())
     }
-}
+
+    static postToGoogle (image_url) {
+        return fetch(this.googleURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              requests: [{
+                image: {
+                  source: {
+                    imageUri: image_url
+                  }
+                },
+                features: [{
+                  type: 'LABEL_DETECTION',
+                  maxResults: 10
+                }]
+              }]
+            })
+          })
+          .then(resp => resp.json())
+      }
+    }
+
 
 API.init()
 
