@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './containers/NavBar';
 import ImageBrowser from './containers/ImageBrowser';
 import ImageForm from './components/ImageForm';
-import SignUpForm from './components/SignUpForm';
-import LoginForm from './components/LoginForm';
+import FormHolder from './containers/FormHolder';
 import logo from './zoobli_logo.png';
 import './App.css';
 
@@ -89,8 +88,7 @@ class App extends Component {
           <img src={logo} alt="logo" />
           < NavBar />
           <div>
-          < SignUpForm handleSignUp={this.handleSignUp}/>
-          < LoginForm handleLogin={this.handleLogin}/>
+            < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
           </div>
           { localStorage.token
           ?

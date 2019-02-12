@@ -8,7 +8,7 @@ const SignUpForm = props => {
             <input type='text' name='last_name' placeholder='Last Name'/>
             <input type='text' name='username' placeholder='Username'/>
             <input type='password' name='password' placeholder='Password'/>
-            <input type='submit'/>
+            <input type='submit' value='Sign Up'/>
         </form>
     )
 
