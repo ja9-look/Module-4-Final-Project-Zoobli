@@ -1,4 +1,4 @@
-class Api::V1::ImagesController < ApplicationController
+class Api::V1::ImagesController < Api::V1::ApplicationController
 
     def index
         @images = Image.all
@@ -11,9 +11,15 @@ class Api::V1::ImagesController < ApplicationController
     end
 
     def create
-        @image = Image.new(image_url: params[:image_url], user_id: params[:user_id])
-        @image.save
+        @image = Image.new(image_params)
+        @image.save!
         render json: @image
+    end
+
+    private
+
+    def image_params
+        params.require(:image).permit(:image_url, :user_id)
     end
 
 end

@@ -13,29 +13,34 @@ class App extends Component {
 
   state = {
     currentUser: '',
-    images: []
+    images: [],
+    showSign: 'up'
   }
 
   login = (data) => {
     localStorage.setItem('token', data.jwt)
-    localStorage.setItem('currentUserId', data.user.id)
-    this.setState({ currentUser: data.user })
+    this.setState({ currentUser: data.user }, this.getImages) 
   }
 
   logout = () => {
-    localStorage.removeItem('currentUserId')
     localStorage.removeItem('token')
   }
 
-  getImages = () => {
+  getImages = () =>
     API.getImages()
-      .then(images => this.setState({ images }))
-  }
+    .then(images => { 
+      this.setState({ images })
+   })
 
   componentDidMount() {
-    this.getImages() 
-    API.getCurrentUser(localStorage.getItem('currentUserId'))
+    if (localStorage.token) {
+        API.getCurrentUser().then(data => {
+          this.setState({ currentUser: data.user })
+          this.getImages()
+        }
+        )
   }
+}
 
   handleSignUp = (event) => {
     event.preventDefault() 
@@ -66,13 +71,13 @@ class App extends Component {
   handleImageForm = (event) => {
     event.preventDefault()
     const image_url = event.target.image_url.value
-    this.postImgtoAPI(image_url)
+    this.postImagetoAPI(image_url)
   }
 
-  postImgtoAPI = (image_url) => {
+  postImagetoAPI = (image_url) => {
     const image = {
       image_url: image_url,
-      user_id: localStorage.getItem('currentUserId')
+      user_id: this.state.currentUser.id
     }
     API.createImage(image)
   }
@@ -83,10 +88,20 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} alt="logo" />
           < NavBar />
+          <div>
           < SignUpForm handleSignUp={this.handleSignUp}/>
           < LoginForm handleLogin={this.handleLogin}/>
+          </div>
+          { localStorage.token
+          ?
+          <div>
           < ImageForm handleImageForm={this.handleImageForm}/>
-          {/* < ImageBrowser images={this.state.images}/> */}
+          < ImageBrowser images={this.state.images}/>
+          </div>
+          :
+          null
+          }
+  
         </header>
       </div>
     );

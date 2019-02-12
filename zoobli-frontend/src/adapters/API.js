@@ -1,9 +1,12 @@
+import { SlowBuffer } from "buffer";
+
 class API {
     static init () {
         this.baseURL = "http://localhost:3001/api/v1"
         this.usersURL = this.baseURL + '/users'
         this.loginURL = this.baseURL + '/login'
         this.imagesURL = this.baseURL + '/images'
+        this.profileURL = this.baseURL + '/profile'
     }
 
     static login (user) {
@@ -14,8 +17,8 @@ class API {
         return this.post(this.usersURL, { user })
     }
 
-    static getCurrentUser (id) {
-        return this.get(this.usersURL + `/${id}`)
+    static getCurrentUser () {
+        return this.get(this.profileURL)
     }
 
     static getImages () {
@@ -23,6 +26,7 @@ class API {
     }
 
     static createImage (image) {
+        console.log(image)
         return this.post(this.imagesURL, { image })
     }
 
