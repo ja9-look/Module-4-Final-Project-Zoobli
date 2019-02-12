@@ -96,7 +96,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} alt="logo" />
           < NavBar />
           <div>
             < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>

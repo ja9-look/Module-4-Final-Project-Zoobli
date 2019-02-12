@@ -23,7 +23,8 @@
   color: #61dafb;
 }
 
-.navbar {
+.navbar 
+.navbar-expand-lg {
   width: 100%
 }
 
