@@ -12,28 +12,35 @@ import API from './adapters/API'
 class App extends Component {
 
   state = {
-    currentUser: null,
-    images: []
+    currentUser: '',
+    images: [],
+    showSign: 'up'
   }
 
   login = (data) => {
-    this.setState({ currentUser: data.user })
     localStorage.setItem('token', data.jwt)
+    this.setState({ currentUser: data.user }, this.getImages) 
   }
 
   logout = () => {
-    this.setState({ currentUser: null })
     localStorage.removeItem('token')
   }
 
-  getImages = () => {
+  getImages = () =>
     API.getImages()
-      .then(images => this.setState({ images }))
-  }
+    .then(images => { 
+      this.setState({ images })
+   })
 
   componentDidMount() {
-    this.getImages() 
+    if (localStorage.token) {
+        API.getCurrentUser().then(data => {
+          this.setState({ currentUser: data.user })
+          this.getImages()
+        }
+        )
   }
+}
 
   handleSignUp = (event) => {
     event.preventDefault() 
@@ -43,7 +50,7 @@ class App extends Component {
       username: event.target.username.value,
       password: event.target.password.value
     }
-    this.postNewUserToAPI(newUser)
+    this.createUser(newUser)
   }
 
   createUser = (newUser) => {
@@ -64,10 +71,10 @@ class App extends Component {
   handleImageForm = (event) => {
     event.preventDefault()
     const image_url = event.target.image_url.value
-    this.state.currentUserId && this.postImgtoAPI(image_url)
+    this.postImagetoAPI(image_url)
   }
 
-  postImgtoAPI = (image_url) => {
+  postImagetoAPI = (image_url) => {
     const image = {
       image_url: image_url,
       user_id: this.state.currentUser.id
@@ -81,10 +88,20 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} alt="logo" />
           < NavBar />
+          <div>
           < SignUpForm handleSignUp={this.handleSignUp}/>
           < LoginForm handleLogin={this.handleLogin}/>
-          {/* < ImageForm handleImageForm={this.handleImageForm}/> */}
-          {/* < ImageBrowser images={this.state.images}/> */}
+          </div>
+          { localStorage.token
+          ?
+          <div>
+          < ImageForm handleImageForm={this.handleImageForm}/>
+          < ImageBrowser images={this.state.images}/>
+          </div>
+          :
+          null
+          }
+  
         </header>
       </div>
     );
