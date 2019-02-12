@@ -8,6 +8,7 @@ class API {
         this.loginURL = this.baseURL + '/login'
         this.imagesURL = this.baseURL + '/images'
         this.tagsURL = this.baseURL + '/tags'
+        this.scoresURL = this.baseURL + '/scores'
         this.profileURL = this.baseURL + '/profile'
         this.wikiURL = "https://en.wikipedia.org/w/api.php?action=opensearch&search="
         this.googleURL = `https://vision.googleapis.com/v1/images:annotate?key=${googleAPIKey}`
@@ -41,8 +42,14 @@ class API {
         return this.post(this.tagsURL, { tag })
     }
 
-    static saveScores () {
+    static postScore (tag, image) {
+        const score = { tag_id: tag.id, image_id: image.id }
+        console.log(score)
+        return this.post(this.scoresURL, { score })
+    }
 
+    static postToWiki (tag) {
+        console.log(this.getFromWiki(this.wikiURL + tag.name))
     }
 
     static post (url, data) {
