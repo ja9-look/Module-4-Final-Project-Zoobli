@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #E8E4DC;
+  background-color: #DBCDBB;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
   color: #61dafb;
 }
 
-#nav {
+.navbar {
   width: 100%
 }
 
