@@ -14,6 +14,10 @@ class API {
         return this.post(this.usersURL, { user })
     }
 
+    static getCurrentUser (id) {
+        return this.get(this.usersURL + `/${id}`)
+    }
+
     static getImages () {
         return this.get(this.imagesURL)
     }
@@ -27,7 +31,8 @@ class API {
             method: 'POST',
             headers: {
             "Content-Type": "application/json",
-            Accept: 'application/json'
+            Accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         }).then(data => data.json())
@@ -35,7 +40,7 @@ class API {
 
     static get (url) {
         return fetch(url, {
-            headers: { Authorization: localStorage.getItem('token') }
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }).then(resp => resp.json())
     }
 }

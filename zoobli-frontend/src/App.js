@@ -12,17 +12,18 @@ import API from './adapters/API'
 class App extends Component {
 
   state = {
-    currentUser: null,
+    currentUser: '',
     images: []
   }
 
   login = (data) => {
-    this.setState({ currentUser: data.user })
     localStorage.setItem('token', data.jwt)
+    localStorage.setItem('currentUserId', data.user.id)
+    this.setState({ currentUser: data.user })
   }
 
   logout = () => {
-    this.setState({ currentUser: null })
+    localStorage.removeItem('currentUserId')
     localStorage.removeItem('token')
   }
 
@@ -33,6 +34,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getImages() 
+    API.getCurrentUser(localStorage.getItem('currentUserId'))
   }
 
   handleSignUp = (event) => {
@@ -43,7 +45,7 @@ class App extends Component {
       username: event.target.username.value,
       password: event.target.password.value
     }
-    this.postNewUserToAPI(newUser)
+    this.createUser(newUser)
   }
 
   createUser = (newUser) => {
@@ -64,13 +66,13 @@ class App extends Component {
   handleImageForm = (event) => {
     event.preventDefault()
     const image_url = event.target.image_url.value
-    this.state.currentUserId && this.postImgtoAPI(image_url)
+    this.postImgtoAPI(image_url)
   }
 
   postImgtoAPI = (image_url) => {
     const image = {
       image_url: image_url,
-      user_id: this.state.currentUser.id
+      user_id: localStorage.getItem('currentUserId')
     }
     API.createImage(image)
   }
@@ -83,7 +85,7 @@ class App extends Component {
           < NavBar />
           < SignUpForm handleSignUp={this.handleSignUp}/>
           < LoginForm handleLogin={this.handleLogin}/>
-          {/* < ImageForm handleImageForm={this.handleImageForm}/> */}
+          < ImageForm handleImageForm={this.handleImageForm}/>
           {/* < ImageBrowser images={this.state.images}/> */}
         </header>
       </div>
