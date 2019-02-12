@@ -112,7 +112,6 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} alt="logo" />
           < NavBar />
           { localStorage.token
           ?
