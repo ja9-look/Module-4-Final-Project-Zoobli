@@ -48,7 +48,12 @@ class API {
         return this.post(this.scoresURL, { score })
     }
 
+    static getDescriptions () {
+        return this.get(this.descriptionsURL)
+    }
+
     static postDescription (description) {
+        console.log(description)
         return this.post(this.descriptionsURL, { description })
     }
 
