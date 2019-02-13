@@ -108,14 +108,22 @@ class App extends Component {
   saveScoregetDescription = (tag) => {
     API.postScore({ tag_id: tag.id, image_id: this.state.currentImage.id })
     API.postToWiki(tag)
-    .then(data => API.postDescription({ tag_id: tag.id, content: data[2][0] }))
+    .then(data => {
+      const desc = data[2]
+      API.postDescription({ tag_id: tag.id, content: desc[0] })
+    })
+  }
+
+  getDescriptions = () => {
+    API.getDescriptions().then(data => console.log(data))
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          < NavBar/>
+          < NavBar />
+          <div> {this.getDescriptions()} </div>
           { localStorage.token
           ?
           <div>
