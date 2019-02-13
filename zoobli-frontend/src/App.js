@@ -98,14 +98,17 @@ class App extends Component {
       const currentTag = data.find(tag => tag.name.toString() === tagName.toString())
       if (!currentTag) {
         API.postTag({ name: tagName })
-          .then(newTag => {
-            API.postScore(newTag, this.state.currentImage)
-            API.postToWiki(newTag)
-        })
+          .then(newTag => this.saveScoregetDescription(newTag))
       } else {
-        API.postScore(currentTag, this.state.currentImage)
+        API.postScore({ tag_id: currentTag.id, image_id: this.state.currentImage.id })
       }
     })
+  }
+
+  saveScoregetDescription = (tag) => {
+    API.postScore({ tag_id: tag.id, image_id: this.state.currentImage.id })
+    API.postToWiki(tag)
+    .then(data => API.postDescription({ tag_id: tag.id, content: data[2][0] }))
   }
 
   render() {
