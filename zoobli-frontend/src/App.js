@@ -128,7 +128,6 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
         < NavBar onToggleClick={this.onToggleClick}/>
-          <div> {this.getDescriptions()} </div>
           { localStorage.token
           ?
           <div>
