@@ -1,4 +1,3 @@
-import { SlowBuffer } from "buffer";
 import googleAPIKey from '../key'
 
 class API {
