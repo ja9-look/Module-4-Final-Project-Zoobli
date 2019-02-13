@@ -2,6 +2,7 @@ import { SlowBuffer } from "buffer";
 import googleAPIKey from '../key'
 
 class API {
+
     static init () {
         this.baseURL = "http://localhost:3001/api/v1"
         this.usersURL = this.baseURL + '/users'
@@ -9,6 +10,7 @@ class API {
         this.imagesURL = this.baseURL + '/images'
         this.tagsURL = this.baseURL + '/tags'
         this.scoresURL = this.baseURL + '/scores'
+        this.descriptionsURL = this.baseURL + '/descriptions'
         this.profileURL = this.baseURL + '/profile'
         this.wikiURL = "https://en.wikipedia.org/w/api.php?action=opensearch&search="
         this.googleURL = `https://vision.googleapis.com/v1/images:annotate?key=${googleAPIKey}`
@@ -42,14 +44,12 @@ class API {
         return this.post(this.tagsURL, { tag })
     }
 
-    static postScore (tag, image) {
-        const score = { tag_id: tag.id, image_id: image.id }
-        console.log(score)
+    static postScore (score) {
         return this.post(this.scoresURL, { score })
     }
 
-    static postToWiki (tag) {
-        console.log(this.getFromWiki(this.wikiURL + tag.name))
+    static postDescription (description) {
+        return this.post(this.descriptionsURL, { description })
     }
 
     static post (url, data) {
@@ -92,7 +92,13 @@ class API {
           })
           .then(resp => resp.json())
       }
+
+    static postToWiki(tag) {
+        return fetch(this.wikiURL + tag.name)
+        .then(res => res.json())
     }
+
+}
 
 
 API.init()
