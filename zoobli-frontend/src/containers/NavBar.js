@@ -7,8 +7,15 @@ const NavBar = (props) => {
         <nav className={'navbar'}>
             <div className="logo_wrapper">
                 <div className="brand">ZOOBLI</div>
-                <button className={'sign_up_button' } >Sign Up</button>
-                <button className={'login_logout_button'}>Login</button>
+                {!localStorage.token
+                ?
+                <div>
+                    <button className={'sign_up_button'} onClick={props.handleSignUpFormClick}>Sign Up</button>
+                    <button className={'login_button'} onClick={props.handleLoginFormClick}>Login</button>                    
+                </div>
+                :
+                    <button className={'logout_button'} onClick={props.logout}>Logout</button>                                
+                }
             </div>
                 <img className='pseudobutton' src= {require('../add_button.png')} />
                 <img className="add_image_button" src= {require('../add_button.png')} />
@@ -25,45 +32,6 @@ const NavBar = (props) => {
                 </div> */}
             </div>
         </nav>
-        // <nav className="navbar navbar-expand-lg navbar-light">
-        //     <a className="navbar-brand" href="/"><img alt="zoobli_logo" width="200px" src={ logo } /></a>
-        //     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        //         <span className="navbar-toggler-icon"></span>
-        //     </button>
-
-        //     <div className="collapse navbar-collapse" id="navbarSupportedContent" data-toggle="collapse" >
-        //         <ul className="navbar-nav mr-auto">
-        //             <li className="nav-item">
-        //                 <a className="nav-link" href="/">Link</a>
-        //             </li>
-        //             <li className="nav-item dropdown">
-        //                 <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        //                     Dropdown
-        //                 </a>
-        //                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-        //                     <a className="dropdown-item" href="/">Action</a>
-        //                     <a className="dropdown-item" href="/">Another action</a>
-        //                     <div className="dropdown-divider"></div>
-        //                     <a className="dropdown-item" href="/">Something else here</a>
-        //                 </div>
-        //             </li>
-                
-        //         </ul>
-        //         <form className="form-inline my-2 my-lg-0">
-        //             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        //             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        //         </form>
-        //         <ul className="navbar-nav mr-auto">
-        //             <li className="nav-item">
-        //                 <a className="nav-link" href="/">Login</a>
-        //             </li>
-        //             <li className="nav-item">
-        //                 <a className="nav-link" href="/">Signup</a>
-        //             </li>
-        //         </ul>
-        //     </div>
-        // </nav>
-        
     )
 
 }

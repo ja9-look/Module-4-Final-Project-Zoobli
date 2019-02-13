@@ -1,5 +1,5 @@
 * {
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   font-family: 'Unica One', sans-serif;
 }
@@ -87,13 +87,26 @@ button:hover {
 }
  */
 
-  .sign_up_button {
-    font-size: 20px;
+  .sign_up_button.hidden {
+    display: none;
   }
 
-  .login_logout_button {
-    font-size: 20px;
+  .login_button {
     margin: 0 5px;
+  }
+
+  .login_button.hidden{
+    display: none;
+  }
+
+  .logout_button.hidden {
+    display: none;
+  }
+
+
+  
+  .add_image_button.hidden {
+  display: none;
   }
 
   /*
@@ -152,7 +165,7 @@ button:hover {
     margin: 2px auto;
   }
 
-  .login_logout_button {
+  .login_button {
     width: 100%;
     padding: 5px 0;    
     margin: 2px auto;
@@ -161,6 +174,31 @@ button:hover {
 }
 
 */
+
+.signUpForm {
+  margin-top: 20px;
+}
+
+.signUpForm input{
+  display: block;
+  margin: 10px auto;
+}
+
+.signUpForm.hidden {
+  display: none;
+}
+
+.loginForm {
+  margin-top: 20px;
+}
+
+.loginForm input{
+  display: block;
+  margin: 10px auto;
+}
+.loginForm.hidden {
+  display: none;
+}
 
 #button {
     background-color: transparent;
@@ -186,16 +224,11 @@ button:hover {
   overflow: scroll;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ImageForm {
+  margin-top: 10px;
 }
 
-.TagCard {
+.ImageCard {
   position: relative;
   margin: 1em;
   height: 250px;
