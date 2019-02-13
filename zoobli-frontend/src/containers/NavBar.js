@@ -5,18 +5,21 @@ const NavBar = (props) => {
 
     return (
 
-        <nav className='navbar'>
-            <button className="toggle_button" onClick={props.onToggleClick}>Menu</button>
-                <div><img width="200px" alt="zoobli" src = { logo } /></div>
-            <ul>
-                <li>Add new image</li>
-                <li>Add new image</li>
-            </ul>
-            <div className={'search_form_wrapper'}>
-                <form>
-                    <input type="search" />
-                    <input type="submit" />
-                </form>
+        <nav className={'navbar'}>
+            <div><img width="200px" alt="zoobli" src = { logo } /></div>
+            <button className="toggle_button" onClick={props.onToggleClick}>Expand</button>
+            <div className="menu">
+                <ul>
+                    <li>Add new image</li>
+                </ul>
+                <div className={'search_form_wrapper'}>
+                    <form>
+                        <input type="search" />
+                        <input type="submit" />
+                    </form>
+                </div>
+                <button className={'sign_up_button'}>Sign Up</button>
+                <button className={'login_button'}>Login</button>
             </div>
         </nav>
         // <nav className="navbar navbar-expand-lg navbar-light">

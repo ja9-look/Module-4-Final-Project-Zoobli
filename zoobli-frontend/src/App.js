@@ -118,11 +118,16 @@ class App extends Component {
     API.getDescriptions().then(data => console.log(data))
   }
 
+  onToggleClick = () => {
+    const menu = document.querySelector('.menu')
+    menu.classList.toggle("visible")
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          < NavBar />
+        < NavBar onToggleClick={this.onToggleClick}/>
           <div> {this.getDescriptions()} </div>
           { localStorage.token
           ?

@@ -2,7 +2,19 @@
   height: 100vh;
   text-align: center;
   background-color: #DBCDBB;
+  font-family: 'Megrim', sans-serif;
 }
+
+@font-face {
+  src: url('https://fonts.googleapis.com/css?family=Megrim');
+}
+
+button {
+    background-color: #AD926E;
+    color: #DBCDBB;
+    border: none;
+    border-radius: 20%;
+  }
 
 .navbar {
   width: 100%;
@@ -15,12 +27,18 @@
     display: none;
   }
 
-.navbar ul {
-  list-style: none;
+.navbar .menu {
   display: flex;
   flex: 1 1 auto;
-  justify-content: flex-start;
   overflow: hidden;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1 1 auto;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -30,22 +48,47 @@
   margin: 0 10px;
 }
 
+.search_form_wrapper {
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 738px) {
   .navbar .toggle_button {
     display: block;
   }
 
-  .navbar ul {
+  .navbar .menu {
     height: 0;
   }
 
-  .navbar ul.visible {
+  .navbar .menu.visible {
+    display: block;
     height: auto;
   }
 
-  .search_form_wrapper {
-    display: none;
+  .navbar ul li{
+    margin: 10px auto;
   }
+
+  .search_form_wrapper {
+    width: 100%;
+    float: left;
+  }
+  
+  .sign_up_button {
+    width: 100%;
+    margin: 2px auto;
+  }
+
+  .login_button {
+    width: 100%;
+    margin: 2px auto;
+  }
+
+}
+
+.button {
+    color: #AD926E;
 }
 
 .ImageContainer {
