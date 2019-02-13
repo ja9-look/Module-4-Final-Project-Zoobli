@@ -1,0 +1,27 @@
+import React, { Component } from 'react'
+// import API from '../adapters/API'
+
+class TagCard extends Component {
+
+    state = {
+        image: {}
+    }
+
+    componentDidMount() {
+        this.props.score.then((data) => {
+            this.setState({image: this.props.images.find(i => i.id === data.image_id)})
+        })   
+    }
+
+    render() {
+        return (
+        <div>
+        <img src={this.state.image.image_url} alt=""/>
+        </div>
+        )
+    }
+
+}
+
+export default TagCard
+
