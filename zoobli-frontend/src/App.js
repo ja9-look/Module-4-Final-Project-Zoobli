@@ -132,6 +132,11 @@ class App extends Component {
     menu.classList.toggle("visible")
   }
 
+  onToggleClick = () => {
+    const menu = document.querySelector('.menu')
+    menu.classList.toggle("visible")
+  }
+
   render() {
     console.log(this.state.images)
     return (
