@@ -87,7 +87,10 @@ class App extends Component {
       user_id: this.state.currentUser.id
     }
     API.createImage(image)
-    .then(data => this.setState({ currentImage: data }))
+    .then(data => {
+      this.setState({ currentImage: data })
+      this.getImages()
+    })
     API.postToGoogle(image_url)
     .then(data => data.responses[0].labelAnnotations.map(tag => this.saveTag(tag.description)))
   }
@@ -114,16 +117,11 @@ class App extends Component {
     })
   }
 
-  getDescriptions = () => {
-    API.getDescriptions().then(data => console.log(data))
-  }
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
           < NavBar />
-          <div> {this.getDescriptions()} </div>
           { localStorage.token
           ?
           <div>
