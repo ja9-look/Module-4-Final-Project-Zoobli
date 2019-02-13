@@ -58,7 +58,6 @@ class API {
     }
 
     static postDescription (description) {
-        // console.log(description)
         return this.post(this.descriptionsURL, { description })
     }
 

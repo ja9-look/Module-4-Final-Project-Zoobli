@@ -19,10 +19,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Megrim|Unica+One');
 
+.pseudobutton {
+  cursor: pointer;
+}
+
 button {
     background-color: transparent;
     color: #ffffff;
     border: none;
+    cursor: pointer;
   }
 
 .brand {

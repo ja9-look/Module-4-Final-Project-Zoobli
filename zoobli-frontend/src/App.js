@@ -37,7 +37,6 @@ class App extends Component {
    })
 
   componentDidMount() {
-    console.log("Component did mount")
     if (localStorage.token) {
         API.getCurrentUser().then(data => {
           this.setState({ currentUser: data.user })
@@ -138,7 +137,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.images)
     return (
       <div className="App">
         <header className="App-header">
