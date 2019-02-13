@@ -25,6 +25,10 @@ button {
     border: none;
   }
 
+button:hover {
+  color: #000000;
+}
+
 .brand {
   font-family: 'Megrim';
   font-size: 80px;
@@ -157,6 +161,14 @@ button {
     background-color: transparent;
     color: #ffffff;
     border: none;
+}
+
+#button:hover {
+  color: #000000;
+}
+
+.add_image_button:hover {
+  -webkit-filter: invert(100%);
 }
 
 .ImageContainer {
