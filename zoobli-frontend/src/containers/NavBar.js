@@ -11,6 +11,7 @@ const NavBar = (props) => {
                 <button className={'login_logout_button'}>Login</button>
             </div>
                 <img className='pseudobutton' src= {require('../add_button.png')} />
+                <img className="add_image_button" src= {require('../add_button.png')} />
                 {/* <button className="toggle_button" onClick={props.onToggleClick}>▼</button> */}
             <div className="menu">
                 {/* <ul>
