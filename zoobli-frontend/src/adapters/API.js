@@ -44,6 +44,12 @@ class API {
         return this.post(this.tagsURL, { tag })
     }
 
+     static async getScoresFromTag (id) {
+        const data = await this.get(this.scoresURL)
+        const scores = data.filter(s => s.tag_id === id)
+        return scores
+    }
+
     static postScore (score) {
         return this.post(this.scoresURL, { score })
     }
@@ -53,7 +59,7 @@ class API {
     }
 
     static postDescription (description) {
-        console.log(description)
+        // console.log(description)
         return this.post(this.descriptionsURL, { description })
     }
 
@@ -69,8 +75,8 @@ class API {
         }).then(data => data.json())
     }
 
-    static get (url) {
-        return fetch(url, {
+     static async get (url) {
+        return await fetch(url, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         }).then(resp => resp.json())
     }

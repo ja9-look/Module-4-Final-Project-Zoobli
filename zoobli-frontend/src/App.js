@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './containers/NavBar';
-import ImageBrowser from './containers/ImageBrowser';
+import TagBrowser from './containers/TagBrowser';
 import ImageForm from './components/ImageForm';
 import FormHolder from './containers/FormHolder';
 import logo from './zoobli_logo.png';
@@ -14,6 +14,7 @@ class App extends Component {
     currentUser: '',
     currentImage: '',
     images: [],
+    tags: [],
     showSign: 'up'
   }
 
@@ -33,12 +34,14 @@ class App extends Component {
    })
 
   componentDidMount() {
+    console.log("Component did mount")
     if (localStorage.token) {
         API.getCurrentUser().then(data => {
           this.setState({ currentUser: data.user })
           this.getImages()
+          this.getTags()
         }
-        )
+      )
   }
 }
 
@@ -87,7 +90,10 @@ class App extends Component {
       user_id: this.state.currentUser.id
     }
     API.createImage(image)
-    .then(data => this.setState({ currentImage: data }))
+    .then(data => {
+      this.setState({ currentImage: data })
+      this.getImages()
+    })
     API.postToGoogle(image_url)
     .then(data => data.responses[0].labelAnnotations.map(tag => this.saveTag(tag.description)))
   }
@@ -98,14 +104,14 @@ class App extends Component {
       const currentTag = data.find(tag => tag.name.toString() === tagName.toString())
       if (!currentTag) {
         API.postTag({ name: tagName })
-          .then(newTag => this.saveScoregetDescription(newTag))
+          .then(newTag => this.saveScoreGetDescription(newTag))
       } else {
         API.postScore({ tag_id: currentTag.id, image_id: this.state.currentImage.id })
       }
     })
   }
 
-  saveScoregetDescription = (tag) => {
+  saveScoreGetDescription = (tag) => {
     API.postScore({ tag_id: tag.id, image_id: this.state.currentImage.id })
     API.postToWiki(tag)
     .then(data => {
@@ -114,8 +120,8 @@ class App extends Component {
     })
   }
 
-  getDescriptions = () => {
-    API.getDescriptions().then(data => console.log(data))
+  getTags = () => {
+    return API.getTags().then(data => this.setState({ tags: data}))
   }
 
   onToggleClick = () => {
@@ -124,6 +130,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.images)
     return (
       <div className="App">
         <header className="App-header">
@@ -136,7 +143,7 @@ class App extends Component {
           :
           < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
           }
-          < ImageBrowser images={this.state.images}/>
+          < TagBrowser images={this.state.images} tags={this.state.tags} />
         </header>
       </div>
     );

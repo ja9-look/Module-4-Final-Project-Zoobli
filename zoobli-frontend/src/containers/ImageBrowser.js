@@ -1,15 +1,15 @@
 import React from 'react';
-import ImageCard from '../components/ImageCard';
 
-const ImageBrowser = (props) => {
-    
+const ImageBrowser = props => {
+
     return (
-        <div className="ImageContainer">
+        <div>
             {props.images.map(image => 
-                <ImageCard key={image.id} image={image} />    
-            )}
+        <ImageCard key={image.id} image={image} />    
+        )}
         </div>
     )
+
 }
 
 export default ImageBrowser
