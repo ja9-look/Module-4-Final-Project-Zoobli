@@ -18,8 +18,9 @@ class TagCard extends Component {
 
     render() {
         return (
-        <div>
+        <div className='TagCard'>
         <img className='ImageCard' src={this.state.image.image_url} alt=""/>
+        <p>{this.props.tag.name}</p>
         </div>
         )
     }
