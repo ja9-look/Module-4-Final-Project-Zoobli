@@ -24,6 +24,7 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem('token')
+    this.getImages()
   }
 
   getImages = () =>
@@ -128,17 +129,25 @@ class App extends Component {
     menu.classList.toggle("visible")
   }
 
-  onToggleClick = () => {
-    const menu = document.querySelector('.menu')
-    menu.classList.toggle("visible")
+  handleSignUpFormClick = () => {
+    const signUpForm = document.querySelector('.signUpForm')
+    const loginForm = document.querySelector('.loginForm')
+    signUpForm.classList.toggle('hidden')
   }
+
+  handleLoginFormClick = () => {
+    const loginForm = document.querySelector('.loginForm')
+    const signUpForm = document.querySelector('.signUpForm')
+    loginForm.classList.toggle('hidden')
+  }
+
 
   render() {
     console.log(this.state.images)
     return (
       <div className="App">
         <header className="App-header">
-        < NavBar onToggleClick={this.onToggleClick}/>
+          < NavBar onToggleClick={this.onToggleClick} handleSignUpFormClick={this.handleSignUpFormClick} handleLoginFormClick={this.handleLoginFormClick} logout={this.logout}/>
           { localStorage.token
           ?
           <div>
