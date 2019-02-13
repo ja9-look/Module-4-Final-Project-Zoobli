@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from '../zoobli_logo.png';
 
 const NavBar = (props) => {
 
     return (
 
         <nav className={'navbar'}>
-            <div><img width="200px" alt="zoobli" src = { logo } /></div>
-            <button className="toggle_button" onClick={props.onToggleClick}>Expand</button>
+            <div className="logo_wrapper">
+                <div className="brand">ZOOBLI</div>
+                <button className={'sign_up_button' } >Sign Up</button>
+                <button className={'login_logout_button'}>Login</button>
+            </div>
+                <img src= {require('../add_button.png')} />
+                {/* <button className="toggle_button" onClick={props.onToggleClick}>▼</button> */}
             <div className="menu">
-                <ul>
-                    <li>Add new image</li>
-                </ul>
-                <div className={'search_form_wrapper'}>
+                {/* <ul>
+                    <li>Add new image +</li>
+                </ul> */}
+                {/* <div className={'search_form_wrapper'}>
                     <form>
-                        <input type="search" />
-                        <input type="submit" />
+                        <input type="search" placeholder="Looking for something?"/>
+                        <input id="button" type="submit" value="Search" />
                     </form>
-                </div>
-                <button className={'sign_up_button'}>Sign Up</button>
-                <button className={'login_button'}>Login</button>
+                </div> */}
             </div>
         </nav>
         // <nav className="navbar navbar-expand-lg navbar-light">

@@ -3,7 +3,6 @@ import NavBar from './containers/NavBar';
 import TagBrowser from './containers/TagBrowser';
 import ImageForm from './components/ImageForm';
 import FormHolder from './containers/FormHolder';
-import logo from './zoobli_logo.png';
 import './App.css';
 
 import API from './adapters/API'
@@ -21,10 +20,14 @@ class App extends Component {
   login = (data) => {
     localStorage.setItem('token', data.jwt)
     this.setState({ currentUser: data.user }, this.getImages) 
+    document.querySelector('.sign_up_button').style.display = "none"
+    document.querySelector('.login_logout_button').innerText = "Log Out"
   }
 
   logout = () => {
     localStorage.removeItem('token')
+    document.querySelector('.sign_up_button').style.display = "block"
+    document.querySelector('.login_logout_button').innerText = "Login"
   }
 
   getImages = () =>

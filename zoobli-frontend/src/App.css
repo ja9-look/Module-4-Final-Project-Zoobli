@@ -1,26 +1,55 @@
- .App {
-  height: 100vh;
-  text-align: center;
-  background-color: #DBCDBB;
-  font-family: 'Megrim', sans-serif;
+* {
+  font-size: 16px;
+  box-sizing: border-box;
+  font-family: 'Unica One', sans-serif;
 }
 
+*:focus {
+    outline: none;
+}
+
+.App {
+  height: 100vh;
+  text-align: center;
+  background-image: url('./animal-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color:#ffffff;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Megrim|Unica+One');
+
 button {
-    background-color: #AD926E;
-    color: #DBCDBB;
+    background-color: transparent;
+    color: #ffffff;
     border: none;
-    border-radius: 20%;
   }
 
+.brand {
+  font-family: 'Megrim';
+  font-size: 80px;
+  padding: 20px;
+}
+
+/*
+
 .navbar {
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1em 0;
+  position: relative;
+}
+
+.navbar .logo_wrapper{
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1em;
+  justify-content: space-between;
 }
 
 .navbar .toggle_button {
-    display: none;
+  display: none;
   }
 
 .navbar .menu {
@@ -47,44 +76,87 @@ button {
 .search_form_wrapper {
   margin-right: 10px;
 }
+ */
+
+  .sign_up_button {
+    font-size: 20px;
+  }
+
+  .login_logout_button {
+    font-size: 20px;
+    margin: 0 5px;
+  }
+
+  /*
 
 @media screen and (max-width: 738px) {
   .navbar .toggle_button {
     display: block;
   }
 
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+  
   .navbar .menu {
-    height: 0;
+    display:none;
+    padding: 20px;
   }
-
+  
   .navbar .menu.visible {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    z-index: 100; 
+    width: 100%;
+    background-color: #AD926E;
     display: block;
-    height: auto;
   }
-
-  .navbar ul li{
+  
+  .navbar ul li {
     margin: 10px auto;
+    padding: 4px 0;
+    width: 100%;
+    color: #DBCDBB;
+    border-radius: 5px;
   }
-
+  
   .search_form_wrapper {
     width: 100%;
+    margin-bottom: 5px;
     float: left;
+  }
+
+  .search_form_wrapper form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .search_form_wrapper input:first-child {
+    flex: 1 1 auto;
   }
   
   .sign_up_button {
     width: 100%;
+    padding: 5px 0;
     margin: 2px auto;
   }
 
-  .login_button {
+  .login_logout_button {
     width: 100%;
+    padding: 5px 0;    
     margin: 2px auto;
   }
 
 }
 
-.button {
-    color: #AD926E;
+*/
+
+#button {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
 }
 
 .ImageContainer {
@@ -92,13 +164,13 @@ button {
   display: flex;
   justify-content: space-around;
   flex:1;
-  margin: 15px;
+  padding: 15px;
 }
 
 .ImageCard img {
   width:200px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 5px;
   }
 
 @keyframes App-logo-spin {
