@@ -7,7 +7,7 @@ const TagBrowser = (props) => {
     return (
         <div className="ImageContainer">
         { props.tags.map(tag => 
-                <TagCard key={tag.id} tag={tag} images={props.images} to={'/ImageBrowser'} score={API.getScoresFromTag(tag.id)} />
+                <TagCard key={tag.id} tag={tag} images={props.images} to={'/ImageBrowser'} scores={API.getScoresFromTag(tag.id)} />
                 )
             }
             </div>

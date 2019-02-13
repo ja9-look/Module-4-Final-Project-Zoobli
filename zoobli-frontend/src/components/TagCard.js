@@ -7,9 +7,12 @@ class TagCard extends Component {
         image: {}
     }
 
+    randomElement = arrayLength => Math.floor(Math.random() * arrayLength)
+
     componentDidMount() {
-        this.props.score.then((data) => {
-            this.setState({image: this.props.images.find(i => i.id === data.image_id)})
+        this.props.scores.then((data) => {
+            const score = data[this.randomElement(data.length)]
+            this.setState({image: this.props.images.find(i => i.id === score.image_id)})
         })   
     }
 

@@ -46,7 +46,8 @@ class API {
 
      static async getScoresFromTag (id) {
         const data = await this.get(this.scoresURL)
-        return data.find(s => s.tag_id === id)
+        const scores = data.filter(s => s.tag_id === id)
+        return scores
     }
 
     static postScore (score) {
