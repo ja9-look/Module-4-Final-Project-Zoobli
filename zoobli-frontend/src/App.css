@@ -308,3 +308,12 @@ button:hover {
   height: 100%;
   overflow: hidden;
 }
+
+iframe #cloudinary-overlay.modal {
+    background-color: transparent;
+    color: black;
+}
+
+#cloudinary {
+
+}
