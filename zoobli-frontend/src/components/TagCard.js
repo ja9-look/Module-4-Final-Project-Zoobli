@@ -16,7 +16,7 @@ class TagCard extends Component {
             this.setState({image: this.props.images.find(i => i.id === score.image_id)})
         })   
     }
-
+    
     render() {
         return (
         <div className='TagCard'>
@@ -25,7 +25,6 @@ class TagCard extends Component {
         </div>
         )
     }
-
 }
 
 export default TagCard

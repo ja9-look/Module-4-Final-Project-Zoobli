@@ -3,7 +3,6 @@ import TagCard from '../components/TagCard';
 import API from '../adapters/API';
 
 const TagBrowser = (props) => {
-  
     return (
         <div className="ImageContainer">
         {props.tags.map(tag => 
