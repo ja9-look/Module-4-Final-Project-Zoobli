@@ -1,4 +1,5 @@
 import React from 'react';
+import Widget from '../components/Widget'
 
 const NavBar = (props) => {
 
@@ -18,6 +19,7 @@ const NavBar = (props) => {
                     <div className="logout_image_wrapper">
                         <button className={'logout_button'} onClick={props.logout}>Logout</button>                                                
                         <img className={'toggle_button'} onClick={props.toggleMenu} src= {require('../add_button.png')} />
+        
                     </div>
                 </div>
                 }
