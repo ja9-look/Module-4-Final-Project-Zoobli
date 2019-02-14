@@ -12,7 +12,7 @@ class TagCard extends Component {
     componentDidMount() {
         this.props.scores.then((data) => {
             const score = data[this.randomElement(data.length)]
-            console.log(score.image_id)
+            score && 
             this.setState({image: this.props.images.find(i => i.id === score.image_id)})
         })   
     }
