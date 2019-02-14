@@ -245,6 +245,14 @@ button:hover {
   display: none;
 }
 
+.ImageForm input{
+  border-radius: 10px;
+}
+
+.search_form_wrapper input{
+    border-radius: 10px;
+}
+
 .TagCard {
   position: relative;
   margin: 1em;
