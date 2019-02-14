@@ -1,5 +1,5 @@
 * {
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   font-family: 'Unica One', sans-serif;
 }
@@ -19,15 +19,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Megrim|Unica+One');
 
-.pseudobutton {
-  cursor: pointer;
-}
-
 button {
     background-color: transparent;
     color: #ffffff;
     border: none;
-    cursor: pointer;
   }
 
 button:hover {
@@ -82,18 +77,31 @@ button:hover {
   margin: 0 10px;
 }
 
-.search_form_wrapper {
-  margin-right: 10px;
-}
- */
 
-  .sign_up_button {
-    font-size: 20px;
+  .sign_up_button.hidden {
+    display: none;
   }
 
-  .login_logout_button {
-    font-size: 20px;
+  .login_button {
     margin: 0 5px;
+  }
+
+  .login_button.hidden{
+    display: none;
+  }
+
+  .logout_button.hidden {
+    display: none;
+  }
+  
+  .add_image_button.hidden {
+  display: none;
+  }
+
+  .logout_image_wrapper {
+    display: flex;
+    margin: 0 2em;
+    justify-content: space-between;
   }
 
   /*
@@ -152,7 +160,7 @@ button:hover {
     margin: 2px auto;
   }
 
-  .login_logout_button {
+  .login_button {
     width: 100%;
     padding: 5px 0;    
     margin: 2px auto;
@@ -161,6 +169,47 @@ button:hover {
 }
 
 */
+
+.signUpForm {
+  margin-top: 20px;
+}
+
+.signUpForm input{
+  display: block;
+  margin: 10px auto;
+}
+
+.signUpForm.hidden {
+  display: none;
+}
+
+.loginForm {
+  margin-top: 20px;
+}
+
+.loginForm input{
+  display: block;
+  margin: 10px auto;
+}
+
+.loginForm.hidden {
+  display: none;
+}
+
+.logout_button {
+  display: block;
+  margin: 0 2em;
+  float: right;
+  clear: right;
+}
+
+.toggle_button {
+  display: block;
+  margin: 0 2em;
+  float: right;
+  clear: right;
+}
+
 
 #button {
     background-color: transparent;
@@ -172,7 +221,7 @@ button:hover {
   color: #000000;
 }
 
-.add_image_button:hover {
+.toggle_button:hover {
   -webkit-filter: invert(100%);
 }
 
@@ -186,13 +235,22 @@ button:hover {
   overflow: scroll;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.collapsible_forms {
+  margin: 0.5em 3em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.collapsible_forms.hidden{
+  display: none;
+}
+
+.ImageForm input{
+  border-radius: 10px;
+}
+
+.search_form_wrapper input{
+    border-radius: 10px;
 }
 
 .TagCard {
@@ -219,7 +277,7 @@ button:hover {
   }
 
   .ImageCard:hover {
-    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.4); 
   }
 
 .TagCard p {
