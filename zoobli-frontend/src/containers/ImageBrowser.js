@@ -4,7 +4,7 @@ import ImageCard from '../components/ImageCard';
 const ImageBrowser = props => {
    
     return (
-        <div className='ImageContainer'>
+        <div className='ImageContainer3'>
         {props.images.map(image => 
             <ImageCard key={image.id} image={image} />     
         )}

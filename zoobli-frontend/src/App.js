@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NavBar from './containers/NavBar';
 import TagBrowser from './containers/TagBrowser';
 import ImageForm from './components/ImageForm';
-import Widget from './components/Widget';
 import FormHolder from './containers/FormHolder';
 import TagPage from './containers/TagPage'
 import './App.css';
@@ -23,7 +22,8 @@ class App extends Component {
 
   login = (data) => {
     localStorage.setItem('token', data.jwt)
-    this.setState({ currentUser: data.user }, this.getImages) 
+    this.setState({ currentUser: data.user })
+    this.getImages().then(this.getTags())
   }
 
   logout = () => {
@@ -170,6 +170,11 @@ class App extends Component {
      })
   }
 
+  imagePopUp = () => {
+    const tagCard = document.querySelector('.TagCard')
+    tagCard.classList.toggle('popup')
+  }
+
   showAllTags = () => {
     this.setState({ renderAllTags: true })
   }
@@ -183,14 +188,14 @@ class App extends Component {
           { localStorage.token
           ?
           <div>
-          < ImageForm onChange={this.handleSearch} handleImageForm={this.handleImageForm}/>
+          < ImageForm submitImage={this.postImagetoAPI} onChange={this.handleSearch} handleImageForm={this.handleImageForm}/>
           </div>
           :
           < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
           }
           { this.state.renderAllTags
           ?
-          < TagBrowser images={this.state.images} tags={this.state.filteredTags} handleClick={this.showTagInfo} />
+          < TagBrowser images={this.state.images} tags={this.state.filteredTags} handleClick={this.showTagInfo}/>
           :
           < TagPage tag={this.state.currentTag} handleClick={this.showAllTags} scores={API.getScoresFromTag(this.state.currentTag.id)} allImages={this.state.images} />
           }

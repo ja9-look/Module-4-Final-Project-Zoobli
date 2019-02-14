@@ -1,7 +1,7 @@
 * {
   font-size: 18px;
   box-sizing: border-box;
-  font-family: 'Unica One', sans-serif;
+  font-family: 'Assistant', sans-serif;
 }
 
 *:focus {
@@ -17,7 +17,7 @@
   color:#ffffff;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Megrim|Unica+One');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Assistant|Megrim');
 
 button {
     background-color: transparent;
@@ -31,8 +31,8 @@ button:hover {
 
 .brand {
   font-family: 'Megrim';
-  font-size: 80px;
-  padding: 20px;
+  font-size: 100px;
+  padding: 15px;
 }
 
 /*
@@ -234,6 +234,20 @@ button:hover {
   padding: 15px;
   overflow: scroll;
 }
+.ImageContainer2 {
+  height: 450px;
+  overflow: scroll;
+}
+
+.ImageContainer3 {
+  width: 100vw;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex:1;
+  padding: 15px;
+  overflow: hidden;
+}
 
 .collapsible_forms {
   margin: 0.5em 3em;
@@ -262,7 +276,41 @@ button:hover {
   border-radius: 15px;
 }
 
+@keyframes popInImg {
+  0% {
+    border-radius: 50%;
+    height: 0;
+  }
+  100% {
+    border-radius: 4px;
+    height: 60%;
+  }
+}
+
+.TagCard.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.TagCard.popup .ImageCard {
+  height: 60vh;
+  animation: popInImg .3s forwards;
+}
+
 .ImageCard {
+  pointer-events: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -282,6 +330,7 @@ button:hover {
   }
 
 .TagCard p {
+  font-family: 'Comfortaa';
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -310,14 +359,15 @@ button:hover {
 }
 
 .TagTitle {
-  font-size: 50px;
+  font-family: 'Comfortaa';
+  font-size: 30px;
   color: #000000;
 }
 
 .BackButton {
   display: flex;
   justify-content: left;
-  margin-left: 2em;
+  margin-left: 3em;
 }
 
 .TagP {
@@ -328,5 +378,5 @@ button:hover {
   margin: 3em 10em;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
-  padding: .5em;
+  padding: 2em .5em;
 }

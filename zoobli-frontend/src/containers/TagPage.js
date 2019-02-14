@@ -21,12 +21,14 @@ class TagPage extends Component {
     render() {
         return (
         <div>
-        <button className='BackButton' onClick={this.props.handleClick}>Back</button>
-        <div className='InfoDiv'>
-        <header className='TagTitle'>{this.props.tag.name}</header>
-        <p className='TagP'>{this.state.description.content}</p>
-        </div>
-        <ImageBrowser images={this.state.images} />
+            <button className='BackButton' onClick={this.props.handleClick}>Back</button>
+            <div className='InfoDiv'>
+            <header className='TagTitle'>{this.props.tag.name}</header>
+            <p className='TagP'>{this.state.description.content}</p>
+            </div>
+            <div className="ImageContainer2">
+                <ImageBrowser images={this.state.images} />
+            </div>
         </div>
         )
     }

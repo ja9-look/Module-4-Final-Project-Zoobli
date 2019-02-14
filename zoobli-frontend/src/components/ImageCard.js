@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const ImageCard = (props) => {
+class ImageCard extends Component {
 
-    return (
-        <div className='TagCard'>
-            <img className='ImageCard' src={props.image.image_url} alt=""/>
-        </div>
-    )
+    imagePopUpHandler = (event) => {
+        event.target.classList.toggle('popup')
+    }
+
+    render () {
+
+        return (
+            <div className='TagCard' onClick={this.imagePopUpHandler} >
+                <img className='ImageCard' src={this.props.image.image_url} alt=""/>
+            </div>  
+        )   
+    }
 
 }
+
 
 export default ImageCard

@@ -3,12 +3,18 @@ import { render } from 'react-dom';
 
 class Widget extends Component {
 
+    state = {
+        url: ''
+    }
+
     uploadWidget() {
         window.cloudinary.openUploadWidget({ cloud_name: 'duczihube', upload_preset: 'euvo68qt', tags:['xmas']},
-            function(error, result) {
-                console.log(result);
-            });
+            (error, result) => {
+                this.setState({ url: result[0].url },
+                    () => this.props.submitImage(this.state.url))
+            })
     }
+
     render(){
         return (
             <div className="Widget">
