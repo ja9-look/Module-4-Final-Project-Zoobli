@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './containers/NavBar';
 import TagBrowser from './containers/TagBrowser';
 import ImageForm from './components/ImageForm';
+import Widget from './components/Widget';
 import FormHolder from './containers/FormHolder';
 import TagPage from './containers/TagPage'
 import './App.css';
@@ -111,6 +112,7 @@ class App extends Component {
       } else {
         API.postScore({ tag_id: currentTag.id, image_id: this.state.currentImage.id })
       }
+      this.getTags()
     })
   }
 
@@ -161,6 +163,7 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <div className="App">
         <header className="App-header">
