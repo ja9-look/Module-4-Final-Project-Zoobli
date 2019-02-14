@@ -177,7 +177,7 @@ class App extends Component {
           ?
           < TagBrowser images={this.state.images} tags={this.state.tags} handleClick={this.showTagInfo} />
           :
-          < TagPage tag={this.state.currentTag} handleClick={this.showAllTags}/>
+          < TagPage tag={this.state.currentTag} handleClick={this.showAllTags} scores={API.getScoresFromTag(this.state.currentTag.id)} allImages={this.state.images} />
           }
         </header>
       </div>

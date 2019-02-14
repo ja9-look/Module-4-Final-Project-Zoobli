@@ -6,11 +6,10 @@ const TagBrowser = (props) => {
   
     return (
         <div className="ImageContainer">
-        { props.tags.map(tag => 
-                <TagCard key={tag.id} tag={tag} images={props.images} handleClick={() => props.handleClick(tag)} scores={API.getScoresFromTag(tag.id)} />
-                )
-            }
-            </div>
+        {props.tags.map(tag => 
+            <TagCard key={tag.id} tag={tag} images={props.images} handleClick={() => props.handleClick(tag)} scores={API.getScoresFromTag(tag.id)} />
+        )}
+        </div>
             )
 }
     
