@@ -20,7 +20,7 @@ class TagCard extends Component {
         return (
         <div className='TagCard'>
         <img className='ImageCard' src={this.state.image.image_url} alt=""/>
-        <p>{this.props.tag.name}</p>
+        <p onClick={this.props.handleClick} >{this.props.tag.name}</p>
         </div>
         )
     }

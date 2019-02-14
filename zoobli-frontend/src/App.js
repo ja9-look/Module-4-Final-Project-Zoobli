@@ -3,6 +3,7 @@ import NavBar from './containers/NavBar';
 import TagBrowser from './containers/TagBrowser';
 import ImageForm from './components/ImageForm';
 import FormHolder from './containers/FormHolder';
+import TagPage from './containers/TagPage'
 import './App.css';
 
 import API from './adapters/API'
@@ -12,9 +13,10 @@ class App extends Component {
   state = {
     currentUser: '',
     currentImage: '',
+    currentTag: '',
     images: [],
     tags: [],
-    showSign: 'up'
+    renderAllTags: true
   }
 
   login = (data) => {
@@ -35,7 +37,9 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.token) {
         API.getCurrentUser().then(data => {
-          this.setState({ currentUser: data.user })
+          this.setState({ 
+            currentUser: data.user
+           })
           this.getImages()
           this.getTags()
         }
@@ -132,6 +136,17 @@ class App extends Component {
     menu.classList.toggle("visible")
   }
 
+  showTagInfo = (tag) => {
+    this.setState({ 
+      renderAllTags: false,
+      currentTag: tag
+     })
+  }
+
+  showAllTags = () => {
+    this.setState({ renderAllTags: true })
+  }
+
   render() {
     return (
       <div className="App">
@@ -145,7 +160,12 @@ class App extends Component {
           :
           < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
           }
-          < TagBrowser images={this.state.images} tags={this.state.tags} />
+          { this.state.renderAllTags
+          ?
+          < TagBrowser images={this.state.images} tags={this.state.tags} handleClick={this.showTagInfo} />
+          :
+          < TagPage tag={this.state.currentTag} handleClick={this.showAllTags}/>
+          }
         </header>
       </div>
     );
