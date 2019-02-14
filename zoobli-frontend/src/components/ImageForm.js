@@ -1,7 +1,7 @@
 import React from 'react';
 import Widget from './Widget'
 
-const ImageForm = (props) => {
+const ImageForm = props => {
 
     return(
         <div className={'collapsible_forms hidden'}>
@@ -12,7 +12,7 @@ const ImageForm = (props) => {
             <Widget></Widget>
             <div className={'search_form_wrapper'}>
                 <form>
-                    <input type="search" placeholder="Search tags" />
+                    <input onChange={(event) => props.onChange(event)} type="search" placeholder="Search tags" />
                     <input id="button" type="submit" value="Search" />
                 </form>
             </div>

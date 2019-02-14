@@ -309,11 +309,24 @@ button:hover {
   overflow: hidden;
 }
 
-iframe #cloudinary-overlay.modal {
-    background-color: transparent;
-    color: black;
+.TagTitle {
+  font-size: 50px;
+  color: #000000;
 }
 
-#cloudinary {
+.BackButton {
+  display: flex;
+  justify-content: left;
+  margin-left: 2em;
+}
 
+.TagP {
+  color: #000000;
+}
+
+.InfoDiv {
+  margin: 3em 10em;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  padding: .5em;
 }

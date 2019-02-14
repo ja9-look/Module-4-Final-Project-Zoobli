@@ -17,6 +17,7 @@ class App extends Component {
     currentTag: '',
     images: [],
     tags: [],
+    filteredTags: [],
     renderAllTags: true
   }
 
@@ -126,7 +127,18 @@ class App extends Component {
   }
 
   getTags = () => {
-    return API.getTags().then(data => this.setState({ tags: data}))
+    return API.getTags().then(data => 
+      this.setState({ 
+      tags: data,
+      filteredTags: data
+    }))
+  }
+
+  handleSearch = (event) => {
+    event.preventDefault()
+    const searchTerm = event.target.value.toLowerCase()
+    const filteredTags = this.state.tags.filter(tag => tag.name.toLowerCase().includes(searchTerm))
+    this.setState({ filteredTags: filteredTags })
   }
 
   onToggleClick = () => {
@@ -171,14 +183,14 @@ class App extends Component {
           { localStorage.token
           ?
           <div>
-          < ImageForm handleImageForm={this.handleImageForm}/>
+          < ImageForm onChange={this.handleSearch} handleImageForm={this.handleImageForm}/>
           </div>
           :
           < FormHolder handleSignUp={this.handleSignUp} handleLogin={this.handleLogin}/>
           }
           { this.state.renderAllTags
           ?
-          < TagBrowser images={this.state.images} tags={this.state.tags} handleClick={this.showTagInfo} />
+          < TagBrowser images={this.state.images} tags={this.state.filteredTags} handleClick={this.showTagInfo} />
           :
           < TagPage tag={this.state.currentTag} handleClick={this.showAllTags} scores={API.getScoresFromTag(this.state.currentTag.id)} allImages={this.state.images} />
           }
