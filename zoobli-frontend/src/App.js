@@ -28,6 +28,7 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem('token')
+    this.setState({ filteredTags: [] })
     this.getImages()
   }
 

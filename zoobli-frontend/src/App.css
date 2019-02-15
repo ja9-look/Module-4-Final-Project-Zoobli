@@ -205,7 +205,7 @@ button:hover {
 
 .toggle_button {
   display: block;
-  margin: 0 2em;
+  margin: 0.5em 2em;
   float: right;
   clear: right;
 }
@@ -281,6 +281,11 @@ button:hover {
     border-radius: 50%;
     height: 0;
   }
+
+  80% {
+    height: 61%;
+  }
+
   100% {
     border-radius: 4px;
     height: 60%;
