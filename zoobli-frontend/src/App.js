@@ -17,7 +17,9 @@ class App extends Component {
     images: [],
     tags: [],
     filteredTags: [],
-    renderAllTags: true
+    renderAllTags: true,
+    newImage: false,
+    newTags: []
   }
 
   login = (data) => {
@@ -97,33 +99,48 @@ class App extends Component {
     }
     API.createImage(image)
     .then(data => {
-      this.setState({ currentImage: data })
+      this.setState({ 
+        currentImage: data
+       })
       this.getImages()
     })
     API.postToGoogle(image_url)
-    .then(data => data.responses[0].labelAnnotations.map(tag => this.saveTag(tag.description)))
+    .then(data => data.responses[0].labelAnnotations.map(tag => {
+      this.saveTag(tag.description)
+    }))
   }
 
   saveTag (tagName) {
+    let currentTag
     API.getTags()
     .then(data => {
-      const currentTag = data.find(tag => tag.name.toString() === tagName.toString())
+      currentTag = data.find(tag => tag.name.toString() === tagName.toString())
       if (!currentTag) {
         API.postTag({ name: tagName })
-          .then(newTag => this.saveScoreGetDescription(newTag))
+          .then(newTag => {
+            this.saveScoreGetDescription(newTag)
+            currentTag = newTag
+          })
       } else {
         API.postScore({ tag_id: currentTag.id, image_id: this.state.currentImage.id })
+        this.setState({ 
+          newTags: [...this.state.newTags, currentTag],
+          newImage: true
+        })
       }
-      this.getTags()
     })
   }
 
-  saveScoreGetDescription = (tag) => {
+  saveScoreGetDescription =  (tag) => {
     API.postScore({ tag_id: tag.id, image_id: this.state.currentImage.id })
     API.postToWiki(tag)
     .then(data => {
       const desc = data[2]
       API.postDescription({ tag_id: tag.id, content: desc[0] })
+      this.setState({ 
+        newTags: [...this.state.newTags, tag],
+        newImage: true
+      })
     })
   }
 
@@ -177,7 +194,10 @@ class App extends Component {
   }
 
   showAllTags = () => {
-    this.setState({ renderAllTags: true })
+    this.setState({ 
+      renderAllTags: true,
+      newImage: false
+    })
   }
 
   render() {
@@ -196,7 +216,7 @@ class App extends Component {
           }
           { this.state.renderAllTags
           ?
-          < TagBrowser images={this.state.images} tags={this.state.filteredTags} handleClick={this.showTagInfo}/>
+          < TagBrowser newTags={this.state.newTags} handleBackClick={this.showAllTags} image={this.state.currentImage} newImage={this.state.newImage} images={this.state.images} tags={this.state.filteredTags} handleClick={this.showTagInfo}/>
           :
           < TagPage tag={this.state.currentTag} handleClick={this.showAllTags} scores={API.getScoresFromTag(this.state.currentTag.id)} allImages={this.state.images} />
           }

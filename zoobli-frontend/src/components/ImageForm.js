@@ -13,7 +13,6 @@ const ImageForm = props => {
             <div className={'search_form_wrapper'}>
                 <form>
                     <input onChange={(event) => props.onChange(event)} type="search" placeholder="Search tags" />
-                    <input id="button" type="submit" value="Search" />
                 </form>
             </div>
         </div>
