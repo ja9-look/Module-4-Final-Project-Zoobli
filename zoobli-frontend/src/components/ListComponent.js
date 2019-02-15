@@ -5,27 +5,30 @@ class ListComponent extends Component {
 
     state = {
         showDesc: false,
-        description: {}
+        description: null
     }
 
     componentDidMount() {
         API.getDescriptions().then(data => {
-            console.log(' this.props.tag.id',  this.props.tag.id);
-            this.setState({ description: data.find(descr => descr.tag_id == this.props.tag.id) }, () => console.log(this.state.description))
+            this.setState({ description: data.find(descr => descr.tag_id == this.props.tag.id) })
         })
     }
 
-    handleClick = () => this.setState({ showDesc: !this.state.showDesc })
+    handleClick = () => {
+        if(this.state.description.content) {
+            this.setState({ showDesc: !this.state.showDesc })
+        }
+    }    
 
     render() {
         if (!this.state.showDesc) {
-        return (
-        <li onClick={this.handleClick}>{this.props.tag.name}</li>
-        )
+            return (
+                <li onClick={this.handleClick}>{this.props.tag.name}</li>
+            )
         } else {
-        return (
-        <li onClick={this.handleClick}>{this.state.description.content}</li>    
-        )
+            return (
+                <li onClick={this.handleClick}>{this.state.description.content}</li>    
+            )
         }
     }
 

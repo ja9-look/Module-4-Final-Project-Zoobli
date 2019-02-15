@@ -134,9 +134,9 @@ class App extends Component {
   saveScoreGetDescription =  (tag) => {
     API.postScore({ tag_id: tag.id, image_id: this.state.currentImage.id })
     API.postToWiki(tag)
-    .then(data => {
+    .then(async data => {
       const desc = data[2]
-      API.postDescription({ tag_id: tag.id, content: desc[0] })
+       await API.postDescription({ tag_id: tag.id, content: desc[0] })
       this.setState({ 
         newTags: [...this.state.newTags, tag],
         newImage: true
@@ -196,7 +196,8 @@ class App extends Component {
   showAllTags = () => {
     this.setState({ 
       renderAllTags: true,
-      newImage: false
+      newImage: false,
+      newTags: []
     })
   }
 

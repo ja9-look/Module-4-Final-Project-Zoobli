@@ -10,7 +10,7 @@ class Widget extends Component {
     uploadWidget() {
         window.cloudinary.openUploadWidget({ cloud_name: 'duczihube', upload_preset: 'euvo68qt', tags:['xmas']},
             (error, result) => {
-                this.setState({ url: result[0].url },
+                result && this.setState({ url: result[0].url },
                     () => this.props.submitImage(this.state.url))
             })
     }
